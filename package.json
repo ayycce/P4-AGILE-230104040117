@@ -6,22 +6,21 @@
   "directories": {
     "doc": "docs"
   },
-  
   "scripts": {
-  "dev:orders": "tsx services/order-service/src/index.ts",
-  "dev:notif": "tsx services/notification-service/src/index.ts",
-  "test": "jest --runInBand",
-  "lint:api": "spectral lint openapi/api.yaml",
-  "mock": "prism mock openapi/api.yaml",
-  "typecheck": "tsc --noEmit"
-},
-
+    "dev:orders": "tsx services/order-service/src/server.ts",
+    "dev:notif": "tsx services/notification-service/src/server.ts",
+    "test": "jest --runInBand",
+    "lint:api": "spectral lint openapi/api.yaml",
+    "mock": "prism mock openapi/api.yaml",
+    "typecheck": "tsc --noEmit"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
     "pino": "^10.1.0",
     "pino-http": "^11.0.0",
     "uuid": "^13.0.0",
@@ -36,6 +35,7 @@
     "@types/node": "^24.8.1",
     "@types/supertest": "^6.0.3",
     "jest": "^30.2.0",
+    "pino-pretty": "^13.1.2",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.5",
     "tsx": "^4.20.6",

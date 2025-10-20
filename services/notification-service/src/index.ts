@@ -1,13 +1,16 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
-import { httpLogger, correlationId, requireBearer } from '../../../utils';
+import helmet from 'helmet';
+import { httpLogger, correlationId, requireBearer, errorHandler } from '../../../utils';
 
 const app = express();
 
-app.use(httpLogger);
+/** Urutan: correlation -> helmet -> logger -> auth -> rate limit -> routes -> error */
 app.use(correlationId);
+app.use(helmet());
+app.use(httpLogger);
 app.use(requireBearer);
-app.use(rateLimit({ windowMs: 60_000, max: 120 }));
+app.use(rateLimit({ windowMs: 60_000, max: 120, standardHeaders: true, legacyHeaders: false }));
 
 app.get('/notifications', (req, res) => {
   const limit = Math.max(1, Math.min(100, Number(req.query.limit) || 10));
@@ -19,5 +22,7 @@ app.get('/notifications', (req, res) => {
   }));
   res.json({ data, total: data.length });
 });
+
+app.use(errorHandler);
 
 export default app;
