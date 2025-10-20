@@ -1,0 +1,13 @@
+HTTP/1.1 400 Bad Request
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: *
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: *
+sl-violations: [{"location":["request","body"],"severity":"Error","code":"required","message":"Request body must have required property 'productId'"},{"location":["request","body"],"severity":"Error","code":"required","message":"Request body must have required property 'quantity'"}]
+Content-type: application/json
+Content-Length: 50
+Date: Mon, 20 Oct 2025 03:03:08 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"ValidationError","code":"BAD_REQUEST"}
